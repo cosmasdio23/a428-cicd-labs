@@ -8,9 +8,10 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                sh 'npm config set cache ./.npm --global'
-        	sh 'npm install'
-        	sh 'npm run build'
+                withEnv(['npm_config_cache=./.npm']) {
+                    sh 'npm install'
+                }
+                sh 'npm run build'
             }
         }
         stage('Test') {
