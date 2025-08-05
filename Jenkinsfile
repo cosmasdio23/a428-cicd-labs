@@ -6,12 +6,6 @@ pipeline {
         }
     }
     stages {
-        stage('Declarative: Checkout SCM') {
-            steps {
-                cleanWs()
-                checkout scm
-            }
-        }
         stage('Build') {
             steps {
                 withEnv(['npm_config_cache=./.npm']) {
