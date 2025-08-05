@@ -6,9 +6,15 @@ pipeline {
         }
     }
 stages {
+        stage('Declarative: Checkout SCM') {
+            steps {
+                cleanWs()
+                checkout scm
+            }
+        }
+stages {
         stage('Build') {
             steps {
-		cleanWs()
                 withEnv(['npm_config_cache=./.npm']) {
                     sh 'npm install'
                 }
