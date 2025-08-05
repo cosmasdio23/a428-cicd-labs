@@ -19,5 +19,29 @@ pipeline {
                 sh 'npm run test'
             }
         }
+        stage('Manual Approval') {
+            steps {
+                script {
+                    timeout(time: 15, unit: 'MINUTES') {
+                        input message: 'Lanjutkan ke tahap Deploy?'
+                    }
+                }
+            }
+        }
+        stage('Deploy') {
+            steps {
+                script {
+                    try {
+                        echo 'Aplikasi akan berjalan selama 1 menit...'
+                        sh "nohup npm start &"
+                        // Menunggu 60 detik
+                        sleep(60)
+                    } finally {
+                        echo 'Menghentikan aplikasi...'
+                        sh "killall node"
+                    }
+                }
+            }
+        }
     }
 }
