@@ -5,14 +5,13 @@ pipeline {
             args '-v /var/run/docker.sock:/var/run/docker.sock'
         }
     }
-stages {
+    stages {
         stage('Declarative: Checkout SCM') {
             steps {
                 cleanWs()
                 checkout scm
             }
         }
-stages {
         stage('Build') {
             steps {
                 withEnv(['npm_config_cache=./.npm']) {
@@ -41,7 +40,6 @@ stages {
                     try {
                         echo 'Aplikasi akan berjalan selama 1 menit...'
                         sh "nohup npm start &"
-                        // Menunggu 60 detik
                         sleep(60)
                     } finally {
                         echo 'Menghentikan aplikasi...'
