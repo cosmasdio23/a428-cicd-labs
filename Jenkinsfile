@@ -5,13 +5,10 @@ pipeline {
             args '-v /var/run/docker.sock:/var/run/docker.sock'
         }
     }
-    options {
-        cleanWs()
-        skipStagesAfterUnstable()
-    }
-	stages {
+stages {
         stage('Build') {
             steps {
+		cleanWs()
                 withEnv(['npm_config_cache=./.npm']) {
                     sh 'npm install'
                 }
