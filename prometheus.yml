@@ -2,6 +2,6 @@ global:
   scrape_interval: 10s
 scrape_configs:
   - job_name: 'jenkins'
-    metrics_path: '/prom'
+    metrics_path: '/prom/'
     static_configs:
       - targets: ['host.docker.internal:9090']
